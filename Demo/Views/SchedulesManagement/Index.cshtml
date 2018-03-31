@@ -1,0 +1,269 @@
+﻿@model IEnumerable<Demo.Models.Schedule>
+
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+
+    <link href="https://cdn.bootcss.com/datepicker/0.6.4/datepicker.css" rel="stylesheet">
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://cdn.bootcss.com/datepicker/0.6.4/datepicker.js"></script>
+
+    <script src="~/Assets/js/MyJSFramework.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        $().ready(function (e) {
+            //拖拽复制体
+            $('div[id^="draggable"]').draggable({
+                helper: "clone",
+                cursor: "move"
+            });
+
+            //释放后
+            $('div[id^="target"]').droppable({
+                drop: function (event, ui) {
+
+                    $(this).children().remove();
+
+                    var source = ui.draggable.clone();
+
+                    var date = $(this).attr("attrdate");
+                    var employeeName = $(source).text();
+                    var shiftName = $(this).attr("attrshiftname");
+
+                    $('<img />', {
+                        src: '/Assets/images/delete.png',
+                        style: 'display:none;float:right;',
+                        click: function () {
+                            source.remove();
+
+                            var deletedScheduleItem = {
+                                "Date": date,
+                                "EmployeeName": "",
+                                "Id": "00000000-0000-0000-0000-000000000000",
+                                "ShiftName": shiftName
+                            };
+
+                            updateEntity(deletedScheduleItem, "api/Schedules/");
+                        }
+                    }).appendTo(source);
+
+
+                    source.mouseenter(function () {
+                        $(this).find("img").show();
+                    });
+
+                    source.mouseleave(function () {
+                        $(this).find("img").hide();
+                    });
+
+                    $(this).append(source);
+
+                    var newScheduleItem = {
+                        "Date": date,
+                        "EmployeeName": employeeName,
+                        "Id": "00000000-0000-0000-0000-000000000000",
+                        "ShiftName": shiftName
+                    };
+
+                    updateEntity(newScheduleItem, "api/Schedules/");
+
+                }
+            });
+
+            $("#dpStartDate").datepicker({
+                format: "yyyy-mm-dd"
+            });
+
+            $("#dpEndDate").datepicker({
+                format: "yyyy-mm-dd"
+            });
+
+            $('#btnGenerateCalendar').click(function () {
+
+                //var obj = {};
+                //obj.StartDate = $("#dpStartDate").val(),
+                //    obj.EndDate = $("#dpEndDate").val()
+
+                var jsonObj = [];
+                jsonObj.push({ "StartDate": $("#dpStartDate").val(), "EndDate": $("#dpEndDate").val() });
+
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(jsonObj),
+                    dataType: "json",
+                    type: "POST",
+                    url: "Calendar/GenerateCalendar",
+                    success: function (data) {
+
+                    }
+                });
+            });
+        });
+    </script>
+    <style>
+        .app-tabs .app-tabs-item {
+            background-color: gray;
+            border: 1px solid;
+            border-radius: 100px;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            height: auto;
+            padding: 5px 10px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+            .app-tabs .app-tabs-item:hover {
+                background-color: black;
+            }
+
+        .divSource {
+            background: #eff7ff;
+            border: 1px solid #96c2f1;
+            display: inline-block;
+            height: auto;
+            margin-left: 1px;
+            margin-right: 1px;
+            padding: 1px;
+            width: 100px;
+        }
+
+        .divTarget {
+            background: #eff7ff;
+            height: 24px;
+            width: 108px;
+        }
+
+        table {
+            /*border-collapse: collapse;*/
+            border-spacing: 0;
+            color: #444;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        .custom_tb tr:hover {
+            background-color: #fbf8e9;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .custom_tb th, .custom_tb td {
+            border-left: 1px solid #ccc;
+            border-top: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .custom_tb th {
+            background-color: #dce9f9;
+            border-top: none;
+        }
+
+            .custom_tb td:first-child, .custom_tb th:first-child {
+                border-left: none;
+            }
+
+            .custom_tb th:first-child {
+                border-radius: 6px 0 0 0;
+            }
+
+            .custom_tb th:last-child {
+                border-radius: 0 6px 0 0;
+            }
+
+        .custom_tb tr:last-child td:first-child {
+            border-radius: 0 0 0 6px;
+        }
+
+        .custom_tb tr:last-child td:last-child {
+            border-radius: 0 0 6px 0;
+        }
+
+        .custom_tb {
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-shadow: 0 1px 1px #ccc;
+        }
+    </style>
+
+</head>
+
+<body>
+    <center>
+        <div>
+            <div style="display:inline-block;">
+                <label for="dpStartDate">开始日期</label>
+                <input id="dpStartDate" name="dpStartDate" type="text" />
+                <label for="dpEndDate">结束日期</label>
+                <input id="dpEndDate" name="dpEndDate" type="text" />
+            </div>
+            <div style="display:inline-block;">
+                <div class="app-tabs">
+                    <div class="app-tabs-header">
+                        <div class="app-tabs-item">
+                            <div id="btnGenerateCalendar">生成日历</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="border:none;border-top:1px dotted;height:1px;" />
+        <div>
+            <div class="divSource" id="draggable">顾捷</div>
+            <div class="divSource" id="draggable">洪志秉</div>
+            <div class="divSource" id="draggable">刘国良</div>
+            <div class="divSource" id="draggable">刘敏元</div>
+            <div class="divSource" id="draggable">戚龙飞</div>
+            <div class="divSource" id="draggable">徐锦华</div>
+            <div class="divSource" id="draggable">闫伟</div>
+            <div class="divSource" id="draggable">张宇飞</div>
+        </div>
+        <hr style="border:none;border-top:1px dotted;height:1px;" />
+        <div>
+            <table class='custom_tb'>
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>早班</th>
+                        <th>中班</th>
+                        <th>晚班</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @{
+                            string date = item.Date.ToString("yyyy-MM-dd");
+
+                            string shiftAEmployeeName = item.Shifts[0].Employees[0].EmployeeName;
+                            string shiftBEmployeeName = item.Shifts[1].Employees[0].EmployeeName;
+                            string shiftCEmployeeName = item.Shifts[2].Employees[0].EmployeeName;
+
+                            string shiftAName = item.Shifts[0].ShiftName;
+                            string shiftBName = item.Shifts[1].ShiftName;
+                            string shiftCName = item.Shifts[2].ShiftName;
+                        }
+                        <td>@Html.DisplayFor(modelItem => date)</td>
+                        <td width="200"><div attrdate="@Html.DisplayFor(modelItem => date)" attrshiftname="@Html.DisplayFor(modelItem => shiftAName)" class="divTarget" id="target"><div class="divSource">@Html.DisplayFor(modelItem => shiftAEmployeeName)</div></div></td>
+                        <td width="200"><div attrdate="@Html.DisplayFor(modelItem => date)" attrshiftname="@Html.DisplayFor(modelItem => shiftBName)" class="divTarget" id="target"><div class="divSource">@Html.DisplayFor(modelItem => shiftBEmployeeName)</div></div></td>
+                        <td width="200"><div attrdate="@Html.DisplayFor(modelItem => date)" attrshiftname="@Html.DisplayFor(modelItem => shiftCName)" class="divTarget" id="target"><div class="divSource">@Html.DisplayFor(modelItem => shiftCEmployeeName)</div></div></td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+            </table>
+        </div>
+    </center>
+</body>
+</html>

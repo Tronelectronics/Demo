@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="~/Assets/css/github/frameworks-a4bf54bef6fb.css" rel="stylesheet" />
+    <link href="~/Assets/css/github/github-d5aa84dde2d5.css" rel="stylesheet" />
+    <title>Sign in to Tronelectronics</title>
+</head>
+<body class="logged-out env-production page-responsive min-width-0 session-authentication">
+    <div class="position-relative js-header-wrapper ">
+        <div class="header header-logged-out width-full pt-5 pb-4" role="banner">
+            <div class="container clearfix width-full text-center">
+                <a class="header-logo" href="#">
+                    <img alt="" class="profile-image" src="~/Assets/images/logo.png">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="application-main">
+        <div class="auth-form px-3" id="login">
+            <div class="auth-form-header p-0">
+                <h1>Sign in to us</h1>
+            </div>
+            <div class="auth-form-body mt-3">
+                <label for="login_field">
+                    Username or email address
+                </label>
+                <input autocapitalize="off" autocorrect="off" autofocus="autofocus" class="form-control input-block" id="login_field" name="login" tabindex="1" type="text" />
+                <label for="password">
+                    Password <a href="/password_reset" class="label-link">Forgot password?</a>
+                </label>
+                <input class="form-control input-block" id="password" name="password" tabindex="2" type="password" />
+
+                <input class="btn btn-primary btn-block" name="commit" tabindex="3" type="submit" value="Sign in" />
+            </div>
+            <p class="create-account-callout mt-3">
+                New to us?
+                <a href="#">Create an account</a>.
+            </p>
+        </div>
+    </div>
+    <div class="footer container-lg p-responsive py-6 mt-6 f6">
+        <ul class="list-style-none d-flex flex-justify-center">
+            <li class="mr-3"><a href="#">Terms</a></li>
+            <li class="mr-3"><a href="#">Privacy</a></li>
+            <li class="mr-3"><a href="#">Security</a></li>
+            <li><a href="#" class="link-gray">Contact</a></li>
+        </ul>
+    </div>
+</body>
+</html>

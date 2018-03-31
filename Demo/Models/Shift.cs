@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Demo.Models
+{
+    public class Shift
+    {
+        public string ShiftName { get; set; }
+        public List<Employee> Employees { get; set; }
+    }
+}
