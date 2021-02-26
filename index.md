@@ -1,37 +1,419 @@
-## Welcome to GitHub Pages
+<head>
+    <title>TrakSYS Demo</title>
+    <link rel="stylesheet" href="http://cnshtss03/TS/Content/ts/ets.core.css" type="text/css" />
+    <style>
+        .clock {
+            width: 225px;
+            height: 50px;
+            background: #000;
+            color: #0f0;
+            font-weight: bold;
+            border-radius: 30px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 30px;
+        }
 
-You can use the [editor on GitHub](https://github.com/Tronelectronics/Demo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+        .box {
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            left: 580px;
+            background-image: url('https://img.icons8.com/office/80/000000/empty-box.png');
+        }
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+        .piece {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            left: 0;
+            background-image: url('https://img.icons8.com/office/30/000000/database.png');
+        }
 
-### Markdown
+        .shower {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            left: 300px;
+            background-image: url('https://img.icons8.com/office/30/000000/shower.png');
+        }
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+        .scanner {
+            width: 48px;
+            height: 48px;
+            position: absolute;
+            left: 0;
+            background-image: url('https://img.icons8.com/ios-filled/50/000000/barcode-scanner-2.png');
+        }
+    </style>
+</head>
 
-```markdown
-Syntax highlighted code block
+<body>
+    <header class="header">
+        <nav class="navbar navbar-tsheader-wrapper navbar-fixed-top" role="navigation"
+             style="background-color:palevioletred;">
+            <div class="navbar-header">
+                <div class="navbar-brand navbar-haslogo navbar-hashome">
+                    <div class="navbar-tslogo">
+                        <div class="inner">
+                            <a href="#">
+                                <img src="https://img.icons8.com/windows/32/000000/tesla-logo.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav navbar-nav navbar-right navbar-tsuser-md" style="background-color:palevioletred;">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Demo User</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-wrapper">
+        <section class="tssidebar">
+            <div class="tssidebar-toggle-command">
+                <span class="tssidebar-title">Demo Line 1</span>
+                <span class="tssidebar-toggle"></span>
+            </div>
+            <div class="tssidebar-toggle-content">
+                <ul class="nav nav-tssidebar">
+                </ul>
+            </div>
+        </section>
+        <!--/ .sidebar -->
+        <section class="main">
+            <div class="container-header">
+                <ul class="nav nav-tsspokes">
+                </ul>
+                <ul class="breadcrumb breadcrumb-tsmain">
+                </ul>
+                <h1 id="pagetitle" class="content-header"><span class=""></span></h1>
+                <div class="clearfix"></div>
+            </div>
+            <div class="container-content">
+                <div id="MainContentUpdatePanel">
+                    <div id="R1" class="row ">
+                        <div id="R1C1" class="col-sm-2 col-tsgridlayout-view">
+                            <div class="col-tsgridlayout-view-inner">
+                                <div class="row">
+                                    <div id="scanner" class="scanner"></div>
+                                    <div id="shower" class="shower"></div>
+                                </div>
+                                <div class="row" style="height:50px;">
+                                </div>
+                                <div class="row">
+                                    <div>
+                                        <div>
+                                            <div id="piece-1" class="piece"></div>
+                                        </div>
+                                        <hr style="width: 600px; position:absolute; left:0;" />
+                                        <div style="height: 30px;"></div>
+                                        <hr style="width: 600px; position:absolute; left:0;" />
+                                        <div>
+                                            <div id="box" class="box"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="R1C2" class="col-sm-2 col-tsgridlayout-view"></div>
+                        <div id="R1C3" class="col-sm-2 col-tsgridlayout-view"></div>
+                        <div id="R1C4" class="col-sm-2 col-tsgridlayout-view"></div>
+                        <div id="R1C5" class="col-sm-2 col-tsgridlayout-view"></div>
+                        <div id="R1C6" class="col-sm-2 col-tsgridlayout-view">
+                            <div class="col-tsgridlayout-view-inner">
+                                <div class="row">
+                                    <div class="col-sm-12 tscontentpart-dynamic">
+                                        <div style="width: 225px;">
+                                            <div style="margin:0 auto; padding: 0px 0px 10px 0px; width: 100px;">
+                                                <input type="button" value="Start Moving Part" id="btnStartTimer">
+                                            </div>
+                                        </div>
+                                        <div class="clock">
+                                            <span id="spanClock">00:00:00</span>
+                                        </div>
+                                    </div>
+                                    <h2 id="HeaderPo" class="col-sm-12 tsshort tscontentpart-dynamic">
+                                        <span class=""></span> Process Order
+                                    </h2>
+                                    <div id="DetailsPo_DetailJobDetails" class="col-sm-12 tscontentpart-dynamic">
+                                        <ul class="tsdetail tsdetail-justify">
+                                            <li class="tsdetail-item-key-tsdetailitem_0">
+                                                <span class="tsdetail-field">Number</span>
+                                                <span class="tsdetail-value">1039440</span>
+                                            </li>
+                                            <li class="tsdetail-item-key-tsdetailitem_1">
+                                                <span class="tsdetail-field">Product</span>
+                                                <span class="tsdetail-value">30003815</span>
+                                            </li>
+                                            <li class="tsdetail-item-key-tsdetailitem_2">
+                                                <span class="tsdetail-field"></span>
+                                                <span class="tsdetail-value">NI8193/JM FILTER EXHAUST CATALYST</span>
+                                            </li>
+                                            <li class="tsdetail-item-key-tsdetailitem_3">
+                                                <span class="tsdetail-field">Legacy Product</span>
+                                                <span class="tsdetail-value">NI8193</span>
+                                            </li>
+                                            <li class="tsdetail-item-key-tsdetailitem_4">
+                                                <span class="tsdetail-field">Planned</span>
+                                                <span id="spanPlannedQty" class="tsdetail-value">0</span> PCE
+                                            </li>
+                                            <li class="tsdetail-item-key-tsdetailitem_5">
+                                                <span class="tsdetail-field">Receipted</span>
+                                                <span id="spanReceiptedQty" class="tsdetail-value">0</span> PCE
+                                            </li>
+                                            <li class="tsdetail-item-key-tsdetailitem_6">
+                                                <span class="tsdetail-field">Remaining</span>
+                                                <span id="spanRemainingQty" class="tsdetail-value">0</span> PCE
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="DetailsPo_PComments" class="col-sm-12 tscontentpart-dynamic">
+                                    </div>
+                                    <div id="DetailsPo_OrderComments" class="col-sm-12 tscontentpart-dynamic">
+                                    </div>
+                                    <h2 id="HeaderPackSummary" class="col-sm-12 tsshort tscontentpart-dynamic">
+                                        <span class=""></span>Packaging Specification
+                                    </h2>
+                                    <div class="col-sm-12 col-tsgridlayout-view">
+                                        <div class="col-tsgridlayout-view-inner">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-tsgridlayout-view">
+                                                    <div class="col-tsgridlayout-view-inner">
+                                                        <div class="row">
+                                                            <div id="DetailsPackSpecification_Details"
+                                                                 class="col-sm-12 tscontentpart-dynamic">
+                                                                <ul class="tsdetail tsdetail-justify">
+                                                                    <li class="tsdetail-item-key-tsdetailitem_0">
+                                                                        <span class="tsdetail-field">
+                                                                            Pieces per
+                                                                            Container
+                                                                        </span>
+                                                                        <span class="tsdetail-value">10</span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_1">
+                                                                        <span class="tsdetail-field">
+                                                                            Containers per
+                                                                            Layer
+                                                                        </span>
+                                                                        <span class="tsdetail-value">100</span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_2">
+                                                                        <span class="tsdetail-field">
+                                                                            Layers per
+                                                                            Pallet
+                                                                        </span>
+                                                                        <span class="tsdetail-value">1</span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_3">
+                                                                        <span class="tsdetail-field">
+                                                                            Containers per
+                                                                            Pallet
+                                                                        </span>
+                                                                        <span class="tsdetail-value">100</span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_4">
+                                                                        <span class="tsdetail-field">
+                                                                            Pieces per
+                                                                            Pallet
+                                                                        </span>
+                                                                        <span class="tsdetail-value">1000</span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_5">
+                                                                        <span class="tsdetail-field">Container</span>
+                                                                        <span class="tsdetail-value">40000109</span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_6">
+                                                                        <span class="tsdetail-field">Pallet</span>
+                                                                        <span class="tsdetail-value">40000197</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2 id="HeaderMaterialToPack" class="col-sm-12 tsshort tscontentpart-dynamic">
+                                        <span class=""></span>Product to Pack
+                                    </h2>
+                                    <div class="col-sm-12 col-tsgridlayout-view">
+                                        <div class="col-tsgridlayout-view-inner">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-tsgridlayout-view">
+                                                    <div class="col-tsgridlayout-view-inner">
+                                                        <div class="row">
+                                                            <div id="DetailsMaterialToPack_Details"
+                                                                 class="col-sm-12 tscontentpart-dynamic">
+                                                                <ul class="tsdetail tsdetail-justify">
+                                                                    <li class="tsdetail-item-key-tsdetailitem_0">
+                                                                        <span class="tsdetail-field">Product</span>
+                                                                        <span class="tsdetail-value">30003815</span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_1">
+                                                                        <span class="tsdetail-field"></span>
+                                                                        <span class="tsdetail-value">
+                                                                            NI8193/JM FILTER
+                                                                            EXHAUST CATALYST
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_2">
+                                                                        <span class="tsdetail-field">
+                                                                            Quarantine
+                                                                            Reason
+                                                                        </span>
+                                                                        <span class="tsdetail-value"></span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_3">
+                                                                        <span class="tsdetail-field"></span>
+                                                                        <span class="tsdetail-value">Good</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2 id="HeaderPrinters" class="col-sm-12 tsshort tscontentpart-dynamic">
+                                        <span class=""></span>Printers
+                                    </h2>
+                                    <div class="col-sm-12 col-tsgridlayout-view">
+                                        <div class="col-tsgridlayout-view-inner">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-tsgridlayout-view">
+                                                    <div class="col-tsgridlayout-view-inner">
+                                                        <div class="row">
+                                                            <div id="DetailPrinters_Details"
+                                                                 class="col-sm-12 tscontentpart-dynamic">
+                                                                <ul class="tsdetail tsdetail-justify">
+                                                                    <li class="tsdetail-item-key-tsdetailitem_0">
+                                                                        <span class="tsdetail-field">
+                                                                            Container
+                                                                            Printer
+                                                                        </span>
+                                                                        <span class="tsdetail-value">NONE</span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_1">
+                                                                        <span class="tsdetail-field">
+                                                                            Container
+                                                                            Label
+                                                                        </span>
+                                                                        <span class="tsdetail-value">TCNBX001A</span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_2">
+                                                                        <span class="tsdetail-field">
+                                                                            Pallet
+                                                                            Printer
+                                                                        </span>
+                                                                        <span class="tsdetail-value">NONE</span>
+                                                                    </li>
+                                                                    <li class="tsdetail-item-key-tsdetailitem_3">
+                                                                        <span class="tsdetail-field">Pallet Label</span>
+                                                                        <span class="tsdetail-value">PL0001B2</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ #MainUpdatePanel -->
+                <div class="clearfix"></div>
+            </div>
+        </section>
+        <!--/ .content -->
+    </div>
+    <footer class="footer">
+        <nav class="navbar navbar-default navbar-tsfooter navbar-fixed-bottom" role="navigation"
+             style="background-color:palevioletred;">
+            <ul class="navbar-left tsfooter-links">
+            </ul>
+            <p id="TsDeveloperInfoFooter" class="navbar-text navbar-left"></p>
+            <p class="navbar-text navbar-right">TrakSYS™ © Parsec Automation</p>
+        </nav>
+    </footer>
+    <script>
+        var pieceCount = 1;
+        var plannedQty = 10000;
+        var receiptedQty = 0;
+        var secondsCount = 0;
+        var timeString = "00:00:00";
+        var btnStartTimer = document.getElementById("btnStartTimer");
+        var btnStopTimer = document.getElementById("btnStopTimer");
 
-# Header 1
-## Header 2
-### Header 3
+        function getTime() {
+            secondsCount = secondsCount + 1;
 
-- Bulleted
-- List
+            var hour = parseInt(secondsCount / 3600);
+            var minute = parseInt(secondsCount / 60) - hour * 60;
+            var second = secondsCount - minute * 60 - hour * 3600;
 
-1. Numbered
-2. List
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
 
-**Bold** and _Italic_ and `Code` text
+            if (minute < 10) {
+                minute = "0" + minute;
+            }
 
-[Link](url) and ![Image](src)
-```
+            if (second < 10) {
+                second = "0" + second;
+            }
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+            timeString = hour + ":" + minute + ":" + second;
+        }
 
-### Jekyll Themes
+        function setTimer() {
+            getTime();
+            var spanClock = document.getElementById("spanClock");
+            spanClock.innerHTML = timeString;
+        }
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Tronelectronics/Demo/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+        btnStartTimer.onclick = function () {
+            document.getElementById("spanPlannedQty").innerText = plannedQty;
+            var clockInterval = setInterval(setTimer, 1000);
+            startPiece("piece-1");
+            var pieceCreatingInterval = setInterval(function () {
+                pieceCount = pieceCount + 1;
+                clonePiece("piece-1", "piece" + "-" + pieceCount);
+                startPiece("piece" + "-" + pieceCount);
+            }, 1000);
+        }
 
-### Support or Contact
+        function startPiece(pieceId) {
+            var piece = document.getElementById(pieceId);
+            var pieceMovingInterval = setInterval(function () {
+                if (piece.offsetLeft >= 600) {
+                    piece.style.top = piece.offsetTop + 10 + 'px';
+                    if (piece.offsetTop >= 50) {
+                        receiptedQty = receiptedQty + 1;
+                        piece.style.display = "none";
+                        document.getElementById("spanReceiptedQty").innerText = receiptedQty;
+                        document.getElementById("spanRemainingQty").innerText = plannedQty - receiptedQty;
+                    }
+                } else {
+                    piece.style.left = piece.offsetLeft + 3 + 'px';
+                }
+            }, 100);
+        };
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+        function clonePiece(sourseNodeId, clonedNodeId) {
+            var sourceNode = document.getElementById(sourseNodeId);
+            var clonedNode = sourceNode.cloneNode(true);
+            clonedNode.setAttribute("id", clonedNodeId);
+            clonedNode.style.cssText = "left: 0;"
+            sourceNode.parentNode.appendChild(clonedNode);
+        }
+    </script>
+</body>
